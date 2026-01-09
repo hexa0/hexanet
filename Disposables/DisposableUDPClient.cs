@@ -24,7 +24,14 @@ namespace HexaNet.Disposables
 			Dispose(true);
 		}
 
-		public DisposableUDPClient() : base() { }
+		public DisposableUDPClient() : base()
+		{
+#if NET9_0_OR_GREATER
+			Client.DualMode = true;
+#elif NET35
+			// 3.5 doesn't need ipv6 as it is only communicating with the game client itself
+#endif
+		}
 		public DisposableUDPClient(IPEndPoint endPoint) : base(endPoint) { }
 	}
 }
