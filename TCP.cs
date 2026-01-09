@@ -135,7 +135,7 @@ namespace HexaNet
 		{
 			Console.WriteLine($"TCP: Connected to {remote.Address.GetHashCode()}:{remote.Port}");
 
-			clientSocket = new DisposableTCPClient();
+			clientSocket = new DisposableTCPClient(remote.AddressFamily);
 			clientSocket.Client.ReceiveBufferSize = socketBufferSize;
 			clientSocket.Client.SendBufferSize = socketBufferSize;
 

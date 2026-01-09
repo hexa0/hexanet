@@ -23,7 +23,14 @@ namespace HexaNet.Disposables
 			Server.Close();
 			Stop(true);
 		}
-
-		public DisposableTCPListener(IPEndPoint endPoint) : base(endPoint) { }
+		public DisposableTCPListener(IPEndPoint endPoint) : base(endPoint) 
+		{
+			if (endPoint.Address.Equals(IPAddress.IPv6Any))
+			{
+#if NET9_0_OR_GREATER
+				this.Server.DualMode = true;
+#endif
+			}
+		}
 	}
 }

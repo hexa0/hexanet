@@ -71,7 +71,7 @@ namespace HexaNet
 
 		public override void ConnectTo(IPEndPoint remote) {
 			Console.WriteLine($"UDP: Connected To {remote.Address.GetHashCode()}:{remote.Port}");
-			socket = new DisposableUDPClient();
+			socket = new DisposableUDPClient(remote.AddressFamily);
 			socket.Connect(remote);
 			ContinueConnection();
 		}

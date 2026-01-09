@@ -43,14 +43,7 @@ namespace HexaNet.Disposables
 			}
 		}
 
-		public DisposableTCPClient() : base()
-		{
-#if NET9_0_OR_GREATER
-			Client.DualMode = true;
-#elif NET35
-			// 3.5 doesn't need ipv6 as it is only communicating with the game client itself
-#endif
-		}
+		public DisposableTCPClient(AddressFamily family) : base(family) { }
 		public DisposableTCPClient(IPEndPoint endPoint) : base(endPoint) { }
 	}
 }
